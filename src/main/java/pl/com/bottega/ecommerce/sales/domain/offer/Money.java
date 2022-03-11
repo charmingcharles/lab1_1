@@ -34,6 +34,9 @@ public class Money {
         this.currency = currency;
     }
 
+    public Money() {
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj.getClass() != this.getClass())

@@ -67,7 +67,6 @@ public class OfferItem {
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
-
         this.quantity = quantity;
         this.discount = discount;
         this.discountCause = discountCause;
@@ -77,6 +76,7 @@ public class OfferItem {
             discountValue = discountValue.subtract(discount);
         }
 
+        this.totalCost = new Money();
         this.totalCost.setAmount(price.getAmount().multiply(new BigDecimal(quantity)).subtract(discountValue));
     }
 
