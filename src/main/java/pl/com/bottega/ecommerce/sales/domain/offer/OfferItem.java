@@ -205,7 +205,7 @@ public class OfferItem {
             if (other.price != null) {
                 return false;
             }
-        } else if (!price.equals(other.price)) { //todo add equels to Money
+        } else if (!price.equals(other.price)) {
             return false;
         }
         if (productId == null) {
