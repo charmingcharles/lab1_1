@@ -18,7 +18,9 @@ public class Money {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        final int prime = 31;
+        int result = 1;
+        return prime * result + (amount == null ? 0 : amount.hashCode());
     }
 
     public Money(BigDecimal amount, String currency) {
