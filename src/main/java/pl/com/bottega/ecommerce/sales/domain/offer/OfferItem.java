@@ -47,6 +47,7 @@ public class OfferItem {
     private Money price;
 
     // discount
+/*
     private String discountCause;
 
     //discount money
@@ -54,14 +55,16 @@ public class OfferItem {
     private BigDecimal discount;
 
     //add Money.currency
+*/
+    Discount discount;
 
     public OfferItem(String productId, Money price, String productName, Date productSnapshotDate,
             String productType, int quantity) {
-        this(productId, price, productName, productSnapshotDate, productType, quantity, null, null);
+        this(productId, price, productName, productSnapshotDate, productType, quantity, null);
     }
 
     public OfferItem(String productId, Money price, String productName, Date productSnapshotDate,
-            String productType, int quantity, BigDecimal discount, String discountCause) {
+            String productType, int quantity, Discount discount) {
         this.productId = productId;
         this.price = price;
         this.productName = productName;
@@ -69,11 +72,10 @@ public class OfferItem {
         this.productType = productType;
         this.quantity = quantity;
         this.discount = discount;
-        this.discountCause = discountCause;
 
         BigDecimal discountValue = new BigDecimal(0);
         if (discount != null) {
-            discountValue = discountValue.subtract(discount);
+            discountValue = discountValue.subtract(discount.getValue().getAmount());
         }
 
         this.totalCost = new Money();
@@ -104,12 +106,8 @@ public class OfferItem {
         return totalCost;
     }
 
-    public BigDecimal getDiscount() {
+    public Discount getDiscount() {
         return discount;
-    }
-
-    public String getDiscountCause() {
-        return discountCause;
     }
 
     public int getQuantity() {
