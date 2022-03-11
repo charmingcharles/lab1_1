@@ -24,7 +24,6 @@ public class OfferItem {
     private BigDecimal totalCost; //Money.amount
 
     private String currency; //Money.currency
-
     */
 
     private Money totalCost;
@@ -40,9 +39,12 @@ public class OfferItem {
 
     //product money
 
-    private BigDecimal productPrice; //Money.amount
+/*    private BigDecimal productPrice; //Money.amount
 
     //add Money.currency
+    */
+
+    private Money price;
 
     // discount
     private String discountCause;
@@ -53,15 +55,15 @@ public class OfferItem {
 
     //add Money.currency
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
+    public OfferItem(String productId, Money price, String productName, Date productSnapshotDate,
             String productType, int quantity) {
-        this(productId, productPrice, productName, productSnapshotDate, productType, quantity, null, null);
+        this(productId, price, productName, productSnapshotDate, productType, quantity, null, null);
     }
 
-    public OfferItem(String productId, BigDecimal productPrice, String productName, Date productSnapshotDate,
+    public OfferItem(String productId, Money price, String productName, Date productSnapshotDate,
             String productType, int quantity, BigDecimal discount, String discountCause) {
         this.productId = productId;
-        this.productPrice = productPrice;
+        this.price = price;
         this.productName = productName;
         this.productSnapshotDate = productSnapshotDate;
         this.productType = productType;
@@ -75,15 +77,15 @@ public class OfferItem {
             discountValue = discountValue.subtract(discount);
         }
 
-        this.totalCost.setAmount(productPrice.multiply(new BigDecimal(quantity)).subtract(discountValue));
+        this.totalCost.setAmount(price.getAmount().multiply(new BigDecimal(quantity)).subtract(discountValue));
     }
 
     public String getProductId() {
         return productId;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
+    public Money getPrice() {
+        return price;
     }
 
     public String getProductName() {
@@ -98,12 +100,8 @@ public class OfferItem {
         return productType;
     }
 
-    public BigDecimal getTotalCost() {
-        return totalCost.getAmount();
-    }
-
-    public String getTotalCostCurrency() {
-        return totalCost.getCurrency();
+    public Money getTotalCost() {
+        return totalCost;
     }
 
     public BigDecimal getDiscount() {
@@ -124,7 +122,7 @@ public class OfferItem {
         int result = 1;
         result = prime * result + (discount == null ? 0 : discount.hashCode());
         result = prime * result + (productName == null ? 0 : productName.hashCode());
-        result = prime * result + (productPrice == null ? 0 : productPrice.hashCode());
+        result = prime * result + (price == null ? 0 : price.hashCode());
         result = prime * result + (productId == null ? 0 : productId.hashCode());
         result = prime * result + (productType == null ? 0 : productType.hashCode());
         result = prime * result + quantity;
@@ -158,11 +156,11 @@ public class OfferItem {
         } else if (!productName.equals(other.productName)) {
             return false;
         }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
+        if (price == null) {
+            if (other.price != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!price.equals(other.price)) {
             return false;
         }
         if (productId == null) {
@@ -203,11 +201,11 @@ public class OfferItem {
         } else if (!productName.equals(other.productName)) {
             return false;
         }
-        if (productPrice == null) {
-            if (other.productPrice != null) {
+        if (price == null) {
+            if (other.price != null) {
                 return false;
             }
-        } else if (!productPrice.equals(other.productPrice)) {
+        } else if (!price.equals(other.price)) { //todo add equels to Money
             return false;
         }
         if (productId == null) {
